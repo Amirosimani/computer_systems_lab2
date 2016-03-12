@@ -1,0 +1,30 @@
+sqlite3 twitter.db
+
+#.table and .schema to check the strucutre of database
+
+#Find the number of deleted messages in the dataset
+SELECT count(is_delete)
+	FROM tweets
+	WHERE is_delete = 1;
+#answer: 1554
+
+#Find the number of tweets that are replies to another tweet.
+SELECT count(is_delete)
+	FROM tweets
+	WHERE reply_to <> 0;
+#answer: 2531
+
+#Find the five user IDs (field name: uid) that have tweeted the most.
+SELECT uid, COUNT(*)
+	FROM tweets
+	WHERE is_delete <> 1
+	GROUP BY uid
+	ORDER BY COUNT(*) DESC
+	LIMIT 5;
+	
+#answer: 1269521828|5
+		 #392695315|4
+		 #424808364|3
+		 #1706901902|3
+		 #23991910|2
+
